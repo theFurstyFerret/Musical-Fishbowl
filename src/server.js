@@ -15,7 +15,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-const path = require('path');
 app.use(express.static(path.join(__dirname, 'public')));
 
 // SQLite Setup
@@ -31,7 +30,7 @@ db.serialize(() => {
 });
 
 // Admin Password (Edit this file post-deploy)
-const adminPassFile = 'admin_pass.txt';
+const adminPassFile = path.join(__dirname, 'admin_pass.txt');
 let ADMIN_PASS = 'default123';
 if (!fs.existsSync(adminPassFile)) {
   fs.writeFileSync(adminPassFile, ADMIN_PASS);
